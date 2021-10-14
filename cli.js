@@ -11,6 +11,12 @@ const argv = yargs(hideBin(process.argv))
         type: 'float',
         default: 0.01,
     })
+    .option('optimize', {
+        alias: 'O',
+        description: 'Run svgo.optimize()',
+        type: 'boolean',
+        default: false,
+    })
     .help()
     .alias('help', 'h')
     .argv;
@@ -25,14 +31,17 @@ var source_d = argv.source;
 var path = new paper.Path({pathData: source_d});
 path.simplify(tolerance);
 var svg = path.exportSVG({asString: true});
-// var output_d = parser(svg).attributes.d;
-// console.log(output_d);
 
-// optimize it with svgo
-const { optimize } = require('svgo');
-const result = optimize(svg, {
-  // svgo options go here
-  "multipass": true,
-});
-var output_d = parser(result.data).attributes.d;
+if (argv.optimize) {
+    // optimize it with svgo
+    const { optimize } = require('svgo');
+    const result = optimize(svg, {
+        // svgo options go here
+        "multipass": true,
+    });
+    var output_d = parser(result.data).attributes.d;
+} else {
+    var output_d = parser(svg).attributes.d;
+}
+
 console.log(output_d);
