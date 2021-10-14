@@ -1,0 +1,21 @@
+{
+  "name": "path-simplify",
+  "version": "1.0.0",
+  "description": "CLI to run paper.js path simplify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cosimo Lupo",
+  "license": "Apache-2.0",
+  "bin": {
+    "path-simplify": "./cli.js"
+  },
+  "dependencies": {
+    "html-attribute-parser": "^1.0.0",
+    "jsdom": "^18.0.0",
+    "paper": "^0.12.15",
+    "svgo": "^2.7.0",
+    "yargs": "^17.2.1"
+  }
+}
